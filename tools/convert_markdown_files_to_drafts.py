@@ -1,7 +1,7 @@
 # Converts a directory with .md files to a Drafts .json-file, including all contents and correct creation / modified dates
-# v1.0
+# v1.1
 # Usage:
-# python3 convert_markdown_files_to_drafts.py <directory> > DraftsExport.json
+# python3 convert_markdown_files_to_drafts.py <directory> > exportfile.draftsExport
 #
 import os, time
 import json
@@ -49,7 +49,7 @@ for subdir, dirs, files in os.walk(directory_in_str):
             json_export['accessed_at'] = datetime.fromtimestamp(m_time, timezone.utc).strftime(output_datetime_format)
 
             file_contents = open(filepath)
-            json_export['content'] = file_contents.read()
+            json_export['content'] = file + '\n\n' + file_contents.read()
 
             export_output.append(json_export)
 
